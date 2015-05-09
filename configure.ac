@@ -1,0 +1,18 @@
+AC_PREREQ(2.59)
+
+AC_INIT([whistGame], [0.2.0])
+
+AC_CONFIG_AUX_DIR([config])
+AC_CONFIG_HEADER([src/config.h])
+AC_CONFIG_MACRO_DIR([m4])
+
+AM_INIT_AUTOMAKE([subdir-objects])
+
+AC_PROG_CXX
+AC_LANG_PUSH([C++])
+AX_CXX_COMPILE_STDCXX_11
+AC_PROG_LIBTOOL
+
+AC_CONFIG_FILES([src/Makefile])
+CXXFLAGS="$CXXFLAGS -std=c++0x -Wall"
+AC_OUTPUT
