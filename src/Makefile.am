@@ -8,5 +8,5 @@ bin_PROGRAMS = Server
 
 Server_SOURCES = main.cpp database/Database.cpp \
 		 parser/parser.cpp server/Player.cpp \
-		 server/Players.cpp server/Connection.cpp \
-		 server/ProcessingCommand.cpp
+		 server/Players.cpp server/Connection.cpp server/Table.cpp\
+		 server/ProcessingCommand.cpp server/Tables.cpp
