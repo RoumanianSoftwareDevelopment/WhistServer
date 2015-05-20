@@ -12,7 +12,7 @@ class Table
     public:
         Table(WhistGame::Player *player, short int type, unsigned int id);
         virtual~ Table();
-        void AddPlayer(WhistGame::Player*);
+        void AddPlayer(WhistGame::Player*, int);
         void RemovePlayer(WhistGame::Player*);
     private:
         unsigned int id;
@@ -23,4 +23,3 @@ class Table
 }
 
 #endif
-
