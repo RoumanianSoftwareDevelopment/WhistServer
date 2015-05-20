@@ -20,10 +20,9 @@ void Tables::RemoveTable(WhistGame::Table* table)
 
 WhistGame::Table* Tables::GetTable(unsigned int id)
 {
-    int i = 0;
-    for(auto it = tables.begin(); it != tables.end(); it++, i++)
+    for(auto it = tables.begin(); it != tables.end(); it++)
     {
-        if(i == id)
+        if((*it)->GetId() == id)
             return *it;
     }
 
