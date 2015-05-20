@@ -24,11 +24,15 @@ void Table::AddPlayer(WhistGame::Player* player, int position)
 
 void Table::RemovePlayer(WhistGame::Player* player)
 {
-    int i = 0;
-    for(; player != players[i]; i++);
-
-    players[i] = NULL;
-    playersNumber--;
+    for(int i = 0; i < 6; i++)
+    {
+        if(player == players[i])
+        {
+            players[i] = NULL;
+            playersNumber--;
+            return;
+        }
+    }
 }
 
 Table::~Table()
