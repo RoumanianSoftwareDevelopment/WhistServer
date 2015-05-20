@@ -15,7 +15,7 @@ Table::Table(WhistGame::Player *player, short int type, unsigned int id)
 
 void Table::AddPlayer(WhistGame::Player* player, int position)
 {
-    if(players[position] != NULL)
+    if(players[position] == NULL)
     {
         players[position] = player;
         playersNumber++;
@@ -42,7 +42,7 @@ unsigned int Table::GetId()
 
 short int Table::GetType()
 {
-    return type;    
+    return type;
 }
 
 Table::~Table()
