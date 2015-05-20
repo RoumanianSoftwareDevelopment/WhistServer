@@ -35,6 +35,16 @@ void Table::RemovePlayer(WhistGame::Player* player)
     }
 }
 
+unsigned int Table::GetId()
+{
+    return id;
+}
+
+short int Table::GetType()
+{
+    return type;    
+}
+
 Table::~Table()
 {
 }
