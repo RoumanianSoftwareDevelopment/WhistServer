@@ -1,5 +1,6 @@
 #include "Connection.h"
 #include <cstdlib>
+#include "../parser/parser.h"
 
 using namespace boost::asio::ip;
 using namespace std;
@@ -7,12 +8,13 @@ using namespace WhistGame;
 
 namespace WhistGame {
 
-Connection::Connection(tcp::socket sock, Players* _players) :
+Connection::Connection(tcp::socket sock, Players* _players, Tables* _tables) :
     playerSocket(std::move(sock)),
     player(&playerSocket),
     processingCommand(_players, &player, &writeBuffer)
 {
     players = _players;
+    tables = _tables;
     readBuffer = (char*) malloc(1024 * sizeof(char));
     memset(readBuffer, 0, 1024);
     players->AddPlayer(&player);
@@ -30,21 +32,25 @@ void Connection::Start()
 
 void Connection::Read()
 {
-    int length = strlen(readBuffer);
+    int len = strlen(readBuffer);
     auto self(shared_from_this());
     playerSocket.async_read_some(
-        boost::asio::buffer((void*)(readBuffer + length), 1024 - length),
+        boost::asio::buffer((void*)(readBuffer + len), 1023 - len),
         MakeCustomAllocHandler(allocator,
-            [this, self](boost::system::error_code ec, std::size_t length)
+            [this, self, len](boost::system::error_code ec, std::size_t length)
             {
                 if (!ec)
                 {
-                    readBuffer[length] = '\0';
-                    std::cout << "From client: " << readBuffer << "\n";
-                    processingCommand.Processing(readBuffer);
-                    readBuffer[0] = '\0';
-                    // procesare readBuffer
-                    Write(length);
+                    readBuffer[length + len] = '\0';
+
+                    while (IsThereAnyCommand(readBuffer))
+                    {
+                        string command = ParseMessage(readBuffer);
+                        processingCommand.Processing(command);
+                        Write(length);
+                    }
+
+                    Read();
                 }
                 else
                 {
@@ -67,7 +73,6 @@ void Connection::Write(size_t length)
                 if (!ec)
                 {
                     writeBuffer = "";
-                    Read();
                 }
                 else
                 {
@@ -78,5 +83,15 @@ void Connection::Write(size_t length)
     );
 }
 
-};
+bool Connection::IsThereAnyCommand(char* message)
+{
+    unsigned int size = strlen(message);
+    for (unsigned int i = 0; i < size; i++)
+        if (message[i] == '\n')
+            return true;
+
+    return false;
+}
+
+}
 
