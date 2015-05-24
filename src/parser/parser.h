@@ -6,14 +6,8 @@
 
 namespace WhistGame {
 
-class Parser
-{
-    public:
-        Parser();
-        virtual~ Parser();
-        std::string ParseMessage(std::string&, char = '\n');
-        std::vector<std::string> ParseCommand(std::string&, char = ' ');
-};
+std::string ParseMessage(char*, char = '\n');
+std::vector<std::string> ParseCommand(std::string&, char = ' ');
 
 } // end namespace
 
