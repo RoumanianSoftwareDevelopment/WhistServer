@@ -1,33 +1,26 @@
 #include "parser.h"
-#include <iostream>
+#include <cstring>
 
 using namespace std;
 
 namespace WhistGame {
 
-Parser::Parser()
+string ParseMessage(char* message, char delimiter)
 {
+    string command;
+    unsigned int i;
+    for (i = 0; message[i] != delimiter; i++)
+        command.push_back(message[i]);
 
+    i = command.size() + 1;
+    int  k = 0;
+    for (; i <= strlen(message); i++)
+        message[k++] = message[i];
+    
+    return command;
 }
 
-Parser::~Parser()
-{
-
-}
-
-string Parser::ParseMessage(string& message, char delimiter)
-{
-    size_t found = message.find(delimiter);
-    if (found != string::npos)
-    {
-        string command = message.substr(0, found);
-        message.erase(message.begin(), message.begin() + found + 1);
-        return command;
-    }
-    return "";
-}
-
-vector<string> Parser::ParseCommand(string& command, char delimiter)
+vector<string> ParseCommand(string& command, char delimiter)
 {
     vector<string> parameters;
 
