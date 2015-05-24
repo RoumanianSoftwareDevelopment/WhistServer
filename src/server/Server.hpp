@@ -38,8 +38,8 @@ class Server
                 {
                     if (!ec)
                     {
-                        std::make_shared<WhistGame::Connection>(
-                            std::move(serverSocket), &players)->Start();
+                        std::make_shared<Connection>(
+                            std::move(serverSocket), &players, &tables)->Start();
                         Accept();
                     }
                 }
@@ -50,6 +50,7 @@ class Server
         boost::asio::ip::tcp::acceptor Acceptor;
         boost::asio::ip::tcp::socket serverSocket;
         Players players;
+        Tables tables;
 };
 
 };

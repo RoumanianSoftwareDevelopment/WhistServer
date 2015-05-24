@@ -25,7 +25,6 @@ ProcessingCommand::~ProcessingCommand()
 
 void ProcessingCommand::Processing(std::string input)
 {
-    static Parser parser;
     static string h = host;
     static string c = client;
     static string p = parola;
@@ -53,7 +52,7 @@ void ProcessingCommand::Processing(std::string input)
 //         {},
          {"Register", new RegisterCommand(database)}};
 
-    vector<string> parameters = parser.ParseCommand(input);
+    vector<string> parameters = ParseCommand(input);
     if (functions.count(parameters[0]) > 0)
         *writeBuffer = functions[parameters[0]]->Execute(parameters);
     else

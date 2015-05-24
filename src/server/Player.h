@@ -9,9 +9,9 @@ namespace WhistGame {
 class Player
 {
     public:
-        Player(boost::asio::ip::tcp::socket *sock);
+        Player(boost::asio::ip::tcp::socket*);
         virtual~ Player();
-        void SetName(std::string newName);
+        void SetName(std::string);
         std::string GetName();
         boost::asio::ip::tcp::socket* GetSocket();
     private:

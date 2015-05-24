@@ -11,14 +11,14 @@ class Players
     public:
         Players();
         virtual~ Players();
-        void AddPlayer(WhistGame::Player*);
-        WhistGame::Player* GetPlayer(std::string&);
-        void RemovePlayer(WhistGame::Player*);
+        void AddPlayer(Player*);
+        Player* GetPlayer(std::string&);
+        void RemovePlayer(Player*);
     private:
-        std::list<WhistGame::Player*> players;
+        std::list<Player*> players;
 };
 
-};
+}
 
 #endif
 

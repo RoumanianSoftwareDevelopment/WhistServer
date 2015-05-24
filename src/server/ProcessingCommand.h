@@ -2,6 +2,7 @@
 #define _PROCESSINGCOMMAND_H__
 
 #include "Players.h"
+#include "Tables.h"
 
 namespace WhistGame {
 

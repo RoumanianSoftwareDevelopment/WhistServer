@@ -12,12 +12,12 @@ Players::~Players()
 
 }
 
-void Players::AddPlayer(WhistGame::Player* player)
+void Players::AddPlayer(Player* player)
 {
     players.push_back(player);
 }
 
-WhistGame::Player* Players::GetPlayer(std::string& name)
+Player* Players::GetPlayer(std::string& name)
 {
     for (auto i = players.begin(); i != players.end(); i++)
         if ((*i)->GetName() == name)
@@ -26,7 +26,7 @@ WhistGame::Player* Players::GetPlayer(std::string& name)
     return NULL;
 }
 
-void Players::RemovePlayer(WhistGame::Player* player)
+void Players::RemovePlayer(Player* player)
 {
     players.remove(player);
 }
