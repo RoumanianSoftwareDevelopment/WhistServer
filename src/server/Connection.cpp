@@ -11,7 +11,7 @@ namespace WhistGame {
 Connection::Connection(tcp::socket sock, Players* _players, Tables* _tables) :
     playerSocket(std::move(sock)),
     player(&playerSocket),
-    processingCommand(_players, &player, &writeBuffer)
+    processingCommand(_players, &player, _tables, &writeBuffer)
 {
     players = _players;
     tables = _tables;

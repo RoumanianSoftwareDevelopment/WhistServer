@@ -10,12 +10,13 @@ class ProcessingCommand
 {
     public:
         ProcessingCommand(WhistGame::Players*, WhistGame::Player*,
-                          std::string*);
+                          WhistGame::Tables*, std::string*);
         virtual~ ProcessingCommand();
         void Processing(std::string);
     private:
         WhistGame::Players *players;
         WhistGame::Player *player;
+        WhistGame::Tables *tables;
         std::string *writeBuffer;
 };
 

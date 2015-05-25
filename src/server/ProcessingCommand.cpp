@@ -11,10 +11,12 @@ namespace WhistGame {
 
 ProcessingCommand::ProcessingCommand(WhistGame::Players *_players,
                                      WhistGame::Player *_player,
+                                     WhistGame::Tables *_tables,
                                      std::string *_writeBuffer)
 {
     players = _players;
     player = _player;
+    tables = _tables;
     writeBuffer = _writeBuffer;
 }
 
@@ -57,10 +59,6 @@ void ProcessingCommand::Processing(std::string input)
         *writeBuffer = functions[parameters[0]]->Execute(parameters);
     else
         *writeBuffer = "The command doesn't exist\n";
-
-    if (*writeBuffer == "Login:successfully\n")
-        player->SetName(parameters[1]);
-
 }
 
 }
