@@ -56,7 +56,7 @@ void ProcessingCommand::Processing(std::string input)
 
     vector<string> parameters = ParseCommand(input);
     if (functions.count(parameters[0]) > 0)
-        *writeBuffer = functions[parameters[0]]->Execute(parameters);
+        *writeBuffer = functions[parameters[0]]->Execute(parameters, players, player, tables);
     else
         *writeBuffer = "The command doesn't exist\n";
 }
