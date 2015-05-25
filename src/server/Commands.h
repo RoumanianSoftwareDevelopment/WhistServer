@@ -13,10 +13,16 @@ namespace WhistGame {
 #define if_wrong_command(x, message) if (parameters.size() != x) \
                                         return message
 
+#define EXECUTE virtual std::string Execute(std::vector<std::string>& parameters, \
+                                            Players *players, Player *player, \
+                                            Tables *tables)
+
 class Command
 {
     public:
-        virtual std::string Execute(std::vector<std::string>& parameters) = 0;
+        virtual std::string Execute(std::vector<std::string>& parameters,
+                                    Players *players, Player *player,
+                                    Tables *tables) = 0;
 };
 
 class LoginCommand : public Command
@@ -24,7 +30,7 @@ class LoginCommand : public Command
     public:
         constructor(LoginCommand)
 
-        virtual std::string Execute(std::vector<std::string>& parameters)
+        EXECUTE
         {
             if_wrong_command(3, "Wrong command\n");
             return _database->Login(parameters[1], parameters[2]);
@@ -39,7 +45,7 @@ class RegisterCommand : public Command
     public:
         constructor(RegisterCommand)
 
-        virtual std::string Execute(std::vector<std::string>& parameters)
+        EXECUTE
         {
             if_wrong_command(4, "Wrong command\n");
             return _database->Register(parameters[1], parameters[2],
@@ -55,7 +61,7 @@ class SendFriendRequestCommand : public Command
     public:
         constructor(SendFriendRequestCommand)
 
-        virtual std::string Execute(std::vector<std::string>& parameters)
+        EXECUTE
         {
             if_wrong_command(3, "Wrong command\n");
             return _database->SendFriendRequest(parameters[1], parameters[2]);
@@ -70,7 +76,7 @@ class AcceptFriendRequestCommand : public Command
     public:
         constructor(AcceptFriendRequestCommand)
 
-        virtual std::string Execute(std::vector<std::string>& parameters)
+        EXECUTE
         {
             if_wrong_command(3, "Wrong command\n");
             return _database->AcceptFriendRequest(parameters[1], parameters[2]);
@@ -85,7 +91,7 @@ class RefuseFriendRequestCommand : public Command
     public:
         constructor(RefuseFriendRequestCommand)
 
-        virtual std::string Execute(std::vector<std::string>& parameters)
+        EXECUTE
         {
             if_wrong_command(3, "Wrong command\n");
             return _database->RefuseFriendRequest(parameters[1], parameters[2]);
@@ -100,7 +106,7 @@ class ChangePasswordCommand : public Command
     public:
         constructor(ChangePasswordCommand)
 
-        virtual std::string Execute(std::vector<std::string>& parameters)
+        EXECUTE
         {
             if_wrong_command(4, "Wrong command\n");
             return _database->ChangePassword(parameters[1], parameters[2],
@@ -116,7 +122,7 @@ class DeleteFriendCommand : public Command
     public:
         constructor(DeleteFriendCommand)
 
-        virtual std::string Execute(std::vector<std::string>& parameters)
+        EXECUTE
         {
             if_wrong_command(3, "Wrong command\n");
             return _database->DeleteFriend(parameters[1], parameters[2]);
@@ -131,7 +137,7 @@ class DeleteAvatarCommand : public Command
     public:
         constructor(DeleteAvatarCommand)
 
-        virtual std::string Execute(std::vector<std::string>& parameters)
+        EXECUTE
         {
             if_wrong_command(2, "Wrong command\n");
             return _database->DeleteAvatar(parameters[1]);
@@ -146,7 +152,7 @@ class ChangeAvatarCommand : public Command
     public:
         constructor(ChangeAvatarCommand)
 
-        virtual std::string Execute(std::vector<std::string>& parameters)
+        EXECUTE
         {
             if_wrong_command(3, "Wrong command\n");
             return _database->ChangeAvatar(parameters[1], parameters[2]);
@@ -161,7 +167,7 @@ class BlockPrivMessagesCommand : public Command
     public:
         constructor(BlockPrivMessagesCommand)
 
-        virtual std::string Execute(std::vector<std::string>& parameters)
+        EXECUTE
         {
             if_wrong_command(2, "Wrong command\n");
             return _database->BlockPrivMessages(parameters[1]);
@@ -176,7 +182,7 @@ class DeblockPrivMessagesCommand : public Command
     public:
         constructor(DeblockPrivMessagesCommand)
 
-        virtual std::string Execute(std::vector<std::string>& parameters)
+        EXECUTE
         {
             if_wrong_command(2, "Wrong command\n");
             return _database->DeblockPrivMessages(parameters[1]);
@@ -191,7 +197,7 @@ class BanPlayerCommand : public Command
     public:
         constructor(BanPlayerCommand)
 
-        virtual std::string Execute(std::vector<std::string>& parameters)
+        EXECUTE
         {
             if_wrong_command(3, "Wrong command\n");
             return _database->BanPlayer(parameters[1], parameters[2]);
@@ -206,7 +212,7 @@ class ChangeRankCommand : public Command
     public:
         constructor(ChangeRankCommand)
 
-        virtual std::string Execute(std::vector<std::string>& parameters)
+        EXECUTE
         {
             if_wrong_command(4, "Wrong command\n");
             return _database->ChangeRank(parameters[2], parameters[3]);
@@ -221,7 +227,7 @@ class LostPasswordCommand : public Command
     public:
         constructor(LostPasswordCommand)
 
-        virtual std::string Execute(std::vector<std::string>& parameters)
+        EXECUTE
         {
             if_wrong_command(3, "Wrong command\n");
             return _database->LostPassword(parameters[1], parameters[2]);
@@ -236,7 +242,7 @@ class IsActivatedCommand : public Command
     public:
         constructor(IsActivatedCommand)
 
-        virtual std::string Execute(std::vector<std::string>& parameters)
+        EXECUTE
         {
             if_wrong_command(2, "Wrong command\n");
             return _database->IsActivated(parameters[1]);
