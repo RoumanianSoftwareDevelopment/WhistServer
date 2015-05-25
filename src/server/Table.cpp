@@ -13,16 +13,19 @@ Table::Table(WhistGame::Player *player, short int type, unsigned int id)
         players[i] = NULL;
 }
 
-void Table::AddPlayer(WhistGame::Player* player, int position)
+bool Table::AddPlayer(WhistGame::Player* player, int position)
 {
     if(players[position] == NULL)
     {
         players[position] = player;
         playersNumber++;
+        return true;
     }
+
+    return false;
 }
 
-void Table::RemovePlayer(WhistGame::Player* player)
+bool Table::RemovePlayer(WhistGame::Player* player)
 {
     for(int i = 0; i < 6; i++)
     {
@@ -30,9 +33,11 @@ void Table::RemovePlayer(WhistGame::Player* player)
         {
             players[i] = NULL;
             playersNumber--;
-            return;
+            return true;
         }
     }
+
+    return false;
 }
 
 unsigned int Table::GetId()

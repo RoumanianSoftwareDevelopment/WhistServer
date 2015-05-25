@@ -12,8 +12,8 @@ class Table
     public:
         Table(WhistGame::Player *player, short int type, unsigned int id);
         virtual~ Table();
-        void AddPlayer(WhistGame::Player*, int);
-        void RemovePlayer(WhistGame::Player*);
+        bool AddPlayer(WhistGame::Player*, int);
+        bool RemovePlayer(WhistGame::Player*);
         unsigned int GetId();
         short int GetType();
     private:
