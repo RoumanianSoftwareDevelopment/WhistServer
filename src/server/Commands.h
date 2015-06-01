@@ -37,7 +37,12 @@ class LoginCommand : public Command
                 return "Login:the account is connected\n";
             if (player->GetName() != "")
                 return "Login:you already are connected\n";
-            return _database->Login(parameters[1], parameters[2]);
+
+            std::string result = _database->Login(parameters[1], parameters[2]);
+            if (result == "Login:successfully\n");
+                player->SetName(parameters[1]);
+
+            return result;
         }
 
     private:
