@@ -33,6 +33,10 @@ class LoginCommand : public Command
         EXECUTE
         {
             if_wrong_command(3, "Wrong command\n");
+            if (players->GetPlayer(parameters[1]) != NULL)
+                return "Login:the account is connected\n";
+            if (player->GetName() != "")
+                return "Login:you already are connected\n";
             return _database->Login(parameters[1], parameters[2]);
         }
 
@@ -64,6 +68,8 @@ class SendFriendRequestCommand : public Command
         EXECUTE
         {
             if_wrong_command(3, "Wrong command\n");
+            if (player->GetName() == "")
+                return "You must be connected\n";
             return _database->SendFriendRequest(parameters[1], parameters[2]);
         }
 
@@ -79,6 +85,8 @@ class AcceptFriendRequestCommand : public Command
         EXECUTE
         {
             if_wrong_command(3, "Wrong command\n");
+            if (player->GetName() == "")
+                return "You must be connected\n";
             return _database->AcceptFriendRequest(parameters[1], parameters[2]);
         }
 
@@ -94,6 +102,8 @@ class RefuseFriendRequestCommand : public Command
         EXECUTE
         {
             if_wrong_command(3, "Wrong command\n");
+            if (player->GetName() == "")
+                return "You must be connected\n";
             return _database->RefuseFriendRequest(parameters[1], parameters[2]);
         }
         
@@ -109,6 +119,8 @@ class ChangePasswordCommand : public Command
         EXECUTE
         {
             if_wrong_command(4, "Wrong command\n");
+            if (player->GetName() == "")
+                return "You must be connected\n";
             return _database->ChangePassword(parameters[1], parameters[2],
                                              parameters[3]);
         }
@@ -125,6 +137,8 @@ class DeleteFriendCommand : public Command
         EXECUTE
         {
             if_wrong_command(3, "Wrong command\n");
+            if (player->GetName() == "")
+                return "You must be connected\n";
             return _database->DeleteFriend(parameters[1], parameters[2]);
         }
 
@@ -140,6 +154,8 @@ class DeleteAvatarCommand : public Command
         EXECUTE
         {
             if_wrong_command(2, "Wrong command\n");
+            if (player->GetName() == "")
+                return "You must be connected\n";
             return _database->DeleteAvatar(parameters[1]);
         }
 
@@ -155,6 +171,8 @@ class ChangeAvatarCommand : public Command
         EXECUTE
         {
             if_wrong_command(3, "Wrong command\n");
+            if (player->GetName() == "")
+                return "You must be connected\n";
             return _database->ChangeAvatar(parameters[1], parameters[2]);
         }
 
@@ -170,6 +188,8 @@ class BlockPrivMessagesCommand : public Command
         EXECUTE
         {
             if_wrong_command(2, "Wrong command\n");
+            if (player->GetName() == "")
+                return "You must be connected\n";
             return _database->BlockPrivMessages(parameters[1]);
         }
 
@@ -185,6 +205,8 @@ class DeblockPrivMessagesCommand : public Command
         EXECUTE
         {
             if_wrong_command(2, "Wrong command\n");
+            if (player->GetName() == "")
+                return "You must be connected\n";
             return _database->DeblockPrivMessages(parameters[1]);
         }
 
@@ -200,6 +222,8 @@ class BanPlayerCommand : public Command
         EXECUTE
         {
             if_wrong_command(3, "Wrong command\n");
+            if (player->GetName() == "")
+                return "You must be connected\n";
             return _database->BanPlayer(parameters[1], parameters[2]);
         }
 
@@ -215,6 +239,8 @@ class ChangeRankCommand : public Command
         EXECUTE
         {
             if_wrong_command(4, "Wrong command\n");
+            if (player->GetName() == "")
+                return "You must be connected\n";
             return _database->ChangeRank(parameters[2], parameters[3]);
         }
 
@@ -230,6 +256,8 @@ class LostPasswordCommand : public Command
         EXECUTE
         {
             if_wrong_command(3, "Wrong command\n");
+            if (player->GetName() == "")
+                return "You must be connected\n";
             return _database->LostPassword(parameters[1], parameters[2]);
         }
 
