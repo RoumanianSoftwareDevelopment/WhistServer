@@ -1,4 +1,7 @@
 #include "Table.h"
+#include <algorithm>
+
+using namespace std;
 
 namespace WhistGame
 {
@@ -38,6 +41,28 @@ bool Table::RemovePlayer(WhistGame::Player* player)
     }
 
     return false;
+}
+
+bool Table::AddSpectator(WhistGame::Player* player)
+{
+    auto i = find(spectators.begin(), spectators.end(), player);
+    if (i == spectators.end())
+        return false;
+
+    spectators.push_back(player);
+
+    return true;
+}
+
+bool Table::RemoveSpectator(WhistGame::Player* player)
+{
+    auto i = find(spectators.begin(), spectators.end(), player);
+    if (i == spectators.end())
+        return false;
+
+    spectators.remove(player);
+
+    return true;
 }
 
 unsigned int Table::GetId()
