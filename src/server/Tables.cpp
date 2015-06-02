@@ -5,7 +5,7 @@ namespace WhistGame
 
 Tables::Tables()
 {
-    for (unsigned short int i = 0; i < 100; i++)
+    for (unsigned short int i = 0; i < MAX_TABLES; i++)
         tables[i] = NULL;
 }
 
@@ -25,7 +25,7 @@ bool Tables::AddTable(WhistGame::Table* table)
 
 bool Tables::RemoveTable(unsigned short int id)
 {
-    for (unsigned short int i = 0; i < 100; i++)
+    for (unsigned short int i = 0; i < MAX_TABLES; i++)
         if (tables[i] != NULL)
             if (tables[i]->GetId() == id)
             {
@@ -40,7 +40,7 @@ bool Tables::RemoveTable(unsigned short int id)
 
 WhistGame::Table* Tables::GetTable(unsigned short int id)
 {
-    for(unsigned short int i = 0; i < 100; i++)
+    for(unsigned short int i = 0; i < MAX_TABLES; i++)
     {
         if(tables[i]->GetId() == id)
             return tables[i];
@@ -61,7 +61,10 @@ unsigned short int Tables::GetTablesNo()
 
 short int Tables::GeneratesId()
 {
-    for (unsigned short int i = 0; i < 100; i++)
+    if (tablesNo == MAX_TABLES)
+        return -1;
+
+    for (unsigned short int i = 0; i < MAX_TABLES; i++)
         if (tables[i] == NULL)
             return i;
 
