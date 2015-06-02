@@ -5,25 +5,45 @@ namespace WhistGame
 
 Tables::Tables()
 {
-
+    for (unsigned short int i = 0; i < 100; i++)
+        tables[i] = NULL;
 }
 
-void Tables::AddTable(WhistGame::Table* table)
+bool Tables::AddTable(WhistGame::Table* table)
 {
-    tables.push_back(table);
+    unsigned short int id = table->GetId();
+    if (id < 0 || id > 99)
+        return false;
+    if (tables[id] != NULL)
+        return false;
+
+    tables[id] = table;
+    tablesNo++;
+
+    return true;
 }
 
-void Tables::RemoveTable(WhistGame::Table* table)
+bool Tables::RemoveTable(unsigned short int id)
 {
-    tables.remove(table);
+    for (unsigned short int i = 0; i < 100; i++)
+        if (tables[i] != NULL)
+            if (tables[i]->GetId() == id)
+            {
+                delete tables[i];
+                tables[i] = NULL;
+                tablesNo--;
+                return true;
+            }
+
+    return false;
 }
 
-WhistGame::Table* Tables::GetTable(unsigned int id)
+WhistGame::Table* Tables::GetTable(unsigned short int id)
 {
-    for(auto it = tables.begin(); it != tables.end(); it++)
+    for(unsigned short int i = 0; i < 100; i++)
     {
-        if((*it)->GetId() == id)
-            return *it;
+        if(tables[i]->GetId() == id)
+            return tables[i];
     }
 
     return NULL;
@@ -32,6 +52,20 @@ WhistGame::Table* Tables::GetTable(unsigned int id)
 Tables::~Tables()
 {
 
+}
+
+unsigned short int Tables::GetTablesNo()
+{
+    return tablesNo;
+}
+
+short int Tables::GeneratesId()
+{
+    for (unsigned short int i = 0; i < 100; i++)
+        if (tables[i] == NULL)
+            return i;
+
+    return -1;
 }
 
 }

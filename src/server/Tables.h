@@ -2,7 +2,8 @@
 #define _TABLES_H_
 
 #include "Table.h"
-#include <list>
+
+#define MAX_TABLES 100
 
 namespace WhistGame
 {
@@ -12,11 +13,14 @@ class Tables
     public:
         Tables();
         virtual~ Tables();
-        void AddTable(WhistGame::Table*);
-        WhistGame::Table* GetTable(unsigned int id);
-        void RemoveTable(WhistGame::Table*);
+        bool AddTable(WhistGame::Table*);
+        WhistGame::Table* GetTable(unsigned short int id);
+        bool RemoveTable(unsigned short int id);
+        unsigned short int GetTablesNo();
+        short int GeneratesId();
     private:
-        std::list<WhistGame::Table*> tables;
+        WhistGame::Table* tables[MAX_TABLES];
+        unsigned short int tablesNo = 0;
 };
 
 }
