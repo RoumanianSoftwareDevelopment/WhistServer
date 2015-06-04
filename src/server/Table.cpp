@@ -6,10 +6,9 @@ using namespace std;
 namespace WhistGame
 {
 
-Table::Table(WhistGame::Player *player, short int type, unsigned int id)
+Table::Table(WhistGame::Player *player, short int _type, unsigned int _id) :
+    type(_type), id(_id)
 {
-    this->id = id;
-    this->type = type;
     players[0] = player;
 
     for (int i = 0; i < 6; i++)
@@ -66,12 +65,12 @@ bool Table::RemoveSpectator(WhistGame::Player* player)
     return true;
 }
 
-unsigned int Table::GetId()
+unsigned int Table::GetId() const
 {
     return id;
 }
 
-short int Table::GetType()
+short int Table::GetType() const
 {
     return type;
 }

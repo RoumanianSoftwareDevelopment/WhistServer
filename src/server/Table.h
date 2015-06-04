@@ -11,17 +11,18 @@ namespace WhistGame
 class Table
 {
     public:
-        Table(WhistGame::Player *player, short int type, unsigned int id);
+        Table(WhistGame::Player *player, short int _type, unsigned int _id);
         virtual~ Table();
         bool AddPlayer(WhistGame::Player*, int);
         bool RemovePlayer(WhistGame::Player*);
         bool AddSpectator(WhistGame::Player*);
         bool RemoveSpectator(WhistGame::Player*);
-        unsigned int GetId();
-        short int GetType();
+        unsigned int GetId() const;
+        short int GetType() const;
     private:
-        unsigned int id;
-        short int type, playersNumber = 0;
+        const unsigned int id;
+        const short int type;
+        short int playersNumber = 0;
         std::array<WhistGame::Player*, 6> players;
         std::list<WhistGame::Player*> spectators;
 };
