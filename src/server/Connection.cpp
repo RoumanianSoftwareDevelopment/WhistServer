@@ -24,6 +24,10 @@ Connection::~Connection()
 
 void Connection::Start()
 {
+    PrintData();
+    cout << "# INFO: Was created a connection with ";
+    cout << playerSocket.local_endpoint().address().to_string() << "\n";
+
     Read();
 }
 
@@ -52,8 +56,17 @@ void Connection::Read()
             else
             {
                 if (player.GetName() != "")
+                {
                     processingCommand->RemovePlayer(&player);
-            //    playerSocket.shutdown(tcp::socket::shutdown_both, ec);
+                    PrintData();
+                    cout << "# INFO: '" << player.GetName();
+                    cout << "' disconnected.\n";
+                }
+
+                PrintData();
+                cout << "# INFO: The connection with ";
+                cout << playerSocket.local_endpoint().address().to_string();
+                cout << " was interrupted.\n";
                 playerSocket.close();
             }
         }
@@ -75,7 +88,17 @@ void Connection::Write(size_t length)
             else
             {
                 if (player.GetName() != "")
+                {
                     processingCommand->RemovePlayer(&player);
+                    PrintData();
+                    cout << "# INFO: '" << player.GetName();
+                    cout << "' disconnected.\n";
+                }
+
+                PrintData();
+                cout << "# INFO: The connection with ";
+                cout << playerSocket.local_endpoint().address().to_string();
+                cout << " was interrupted.\n";
                 playerSocket.close();
             }
         }
