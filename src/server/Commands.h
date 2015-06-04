@@ -285,6 +285,47 @@ class IsActivatedCommand : public Command
         WhistGame::Database *_database;
 };
 
+class JoinToTableCommand : public Command
+{
+    public:
+        constructor(JoinToTableCommand)
+
+        EXECUTE
+        {
+            if_wrong_command(2, "Wrong command\n");
+            if (player->GetName() == "")
+                return "You must be connected\n";
+            if (!isNumber(parameters[1]))
+                return "Wrong command\n";
+            int id = stoi(parameters[1]);
+            if (id < 0 || id > 99)
+                return "Wrong command\n";
+
+            Table *t = tables->GetTable(id);
+            if (t == NULL)
+                return "Table doesn't exist\n";
+
+            if (t->AddSpectator(player))
+                return "JoinToTable:successfully\n";
+            else
+                return "JoinToTable:failed\n";
+        }
+
+    private:
+        WhistGame::Database *_database;
+
+        bool isNumber(std::string& str) const
+        {
+            int size = str.size();
+            for (int i = 0; i < size; i++)
+                if (str[i] < '0' || str[i] > '9')
+                    return false;
+
+            return true;
+        }
+
+};
+
 }; // end namespace
 
 #endif
