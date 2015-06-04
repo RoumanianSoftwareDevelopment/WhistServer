@@ -26,6 +26,11 @@ Tables& ProcessingCommand::GetTables()
     return tables;
 }
 
+void ProcessingCommand::RemovePlayer(Player *player)
+{
+    players.RemovePlayer(player);
+}
+
 string ProcessingCommand::Processing(string input, Player *player)
 {
     static map<string, Command*> functions =

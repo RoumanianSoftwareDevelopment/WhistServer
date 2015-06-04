@@ -16,6 +16,7 @@ class ProcessingCommand
         std::string Processing(std::string, Player*);
         Players& GetPlayers();
         Tables& GetTables();
+        void RemovePlayer(Player* player);
     private:
         std::string h = host, n = nume, c = client, p = parola;
         WhistGame::Players players;
