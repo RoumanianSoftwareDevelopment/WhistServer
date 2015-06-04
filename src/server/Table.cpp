@@ -7,10 +7,12 @@ using namespace std;
 namespace WhistGame
 {
 
-Table::Table(WhistGame::Player *player, short int _type, unsigned int _id) :
-    type(_type), id(_id)
+Table::Table(WhistGame::Player *player, short int _type, unsigned int _id)
 {
+    type = _type;
+    id = _id;
     players[0] = player;
+    playersNumber++;
 
     for (int i = 1; i < MAX_PLAYERS_AT_TABLE; i++)
         players[i] = NULL;
@@ -90,7 +92,7 @@ void Table::PrintTable() const
     for (int i = 0; i < 112; i++)
         cout << ' ';
     cout << "*\n* ID: " << id;
-    for (int i = 0; i < 115; i++)
+    for (int i = 0; i < 114; i++)
         cout << ' ';
     cout << "*\n* ";
 
@@ -107,7 +109,7 @@ void Table::PrintTable() const
             len += 5;
         }
 
-    for (int i = 0; i < 122 - len; i++)
+    for (int i = 0; i < 121 - len; i++)
         cout << ' ';
     cout << "*\n";
     for (int i = 0; i < 122; i++)
