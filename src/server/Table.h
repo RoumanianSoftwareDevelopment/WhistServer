@@ -8,6 +8,8 @@
 namespace WhistGame
 {
 
+#define MAX_PLAYERS_AT_TABLE 6
+
 class Table
 {
     public:
@@ -23,7 +25,7 @@ class Table
         const unsigned int id;
         const short int type;
         short int playersNumber = 0;
-        std::array<WhistGame::Player*, 6> players;
+        std::array<WhistGame::Player*, MAX_PLAYERS_AT_TABLE> players;
         std::list<WhistGame::Player*> spectators;
 };
 

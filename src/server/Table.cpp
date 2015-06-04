@@ -11,7 +11,7 @@ Table::Table(WhistGame::Player *player, short int _type, unsigned int _id) :
 {
     players[0] = player;
 
-    for (int i = 0; i < 6; i++)
+    for (int i = 0; i < MAX_PLAYERS_AT_TABLE; i++)
         players[i] = NULL;
 }
 
@@ -29,7 +29,7 @@ bool Table::AddPlayer(WhistGame::Player* player, int position)
 
 bool Table::RemovePlayer(WhistGame::Player* player)
 {
-    for(int i = 0; i < 6; i++)
+    for(int i = 0; i < MAX_PLAYERS_AT_TABLE; i++)
     {
         if(player == players[i])
         {
