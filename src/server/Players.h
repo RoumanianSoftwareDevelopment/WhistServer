@@ -12,7 +12,7 @@ class Players
         Players();
         virtual~ Players();
         void AddPlayer(Player*);
-        Player* GetPlayer(std::string&);
+        Player* GetPlayer(std::string&) const;
         void RemovePlayer(Player*);
     private:
         std::list<Player*> players;

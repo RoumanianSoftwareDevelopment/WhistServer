@@ -17,7 +17,7 @@ void Players::AddPlayer(Player* player)
     players.push_back(player);
 }
 
-Player* Players::GetPlayer(std::string& name)
+Player* Players::GetPlayer(std::string& name) const
 {
     for (auto i = players.begin(); i != players.end(); i++)
         if ((*i)->GetName() == name)

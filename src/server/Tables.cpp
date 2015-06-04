@@ -38,7 +38,7 @@ bool Tables::RemoveTable(unsigned short int id)
     return false;
 }
 
-WhistGame::Table* Tables::GetTable(unsigned short int id)
+WhistGame::Table* Tables::GetTable(unsigned short int id) const
 {
     for(unsigned short int i = 0; i < MAX_TABLES; i++)
     {
@@ -54,12 +54,12 @@ Tables::~Tables()
 
 }
 
-unsigned short int Tables::GetTablesNo()
+unsigned short int Tables::GetTablesNo() const
 {
     return tablesNo;
 }
 
-short int Tables::GeneratesId()
+short int Tables::GeneratesId() const
 {
     if (tablesNo == MAX_TABLES)
         return -1;

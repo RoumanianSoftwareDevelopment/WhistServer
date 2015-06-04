@@ -18,12 +18,12 @@ void Player::SetName(std::string newName)
     name = newName;
 }
 
-std::string Player::GetName()
+std::string Player::GetName() const
 {
     return name;
 }
 
-boost::asio::ip::tcp::socket* Player::GetSocket()
+boost::asio::ip::tcp::socket* Player::GetSocket() const
 {
     return socketPlayer;
 }
