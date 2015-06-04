@@ -16,31 +16,24 @@ void ReadCommandsFromKeyboard(Server& server)
             server.Stop();
             break;
         }
+        if (command == "PrintPlayers")
+        {
+            server.PrintPlayers();
+            continue;
+        }
+        if (command == "PrintTables")
+        {
+            server.PrintTables();
+            continue;
+        }
     }
 }
 
 int main(void)
 {
-/*    
-    map<string, Command*> functions;
-    string h = host;
-    string c = client;
-    string p = parola;
-    string n = nume;
-    Parser parser;
-    Database database(h, c, p, n);
-    functions.insert(make_pair("login", new LoginCommand(database)));
-
-    string command = "login admin2 admin2";
-    vector<string> parameters = parser.ParseCommand(command);
-    cout << functions[parameters[0]]->Execute(parameters) << "\n";
-*/
     Server server(12345);
-
     thread t(ReadCommandsFromKeyboard, std::ref(server));
-
     server.Start();
-
     t.join();
 
     return 0;
