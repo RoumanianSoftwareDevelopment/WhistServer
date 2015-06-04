@@ -1,7 +1,5 @@
 #include "ProcessingCommand.h"
 #include "../parser/parser.h"
-#include "../database/date.h"
-#include "Commands.h"
 #include <map>
 
 using namespace std;
@@ -9,15 +7,8 @@ using namespace WhistGame;
 
 namespace WhistGame {
 
-ProcessingCommand::ProcessingCommand(WhistGame::Players *_players,
-                                     WhistGame::Player *_player,
-                                     WhistGame::Tables *_tables,
-                                     std::string *_writeBuffer)
+ProcessingCommand::ProcessingCommand() : database(h, c, p, n)
 {
-    players = _players;
-    player = _player;
-    tables = _tables;
-    writeBuffer = _writeBuffer;
 }
 
 ProcessingCommand::~ProcessingCommand()
@@ -25,13 +16,18 @@ ProcessingCommand::~ProcessingCommand()
 
 }
 
-void ProcessingCommand::Processing(std::string input)
+Players& ProcessingCommand::GetPlayers()
 {
-    static string h = host;
-    static string c = client;
-    static string p = parola;
-    static string n = nume;
-    static Database database(h, c, p, n);
+    return players;
+}
+
+Tables& ProcessingCommand::GetTables()
+{
+    return tables;
+}
+
+string ProcessingCommand::Processing(string input, Player *player)
+{
     static map<string, Command*> functions =
         {{"Login", new LoginCommand(database)},
          {"SendFriendRequest", new SendFriendRequestCommand(database)},
@@ -56,9 +52,10 @@ void ProcessingCommand::Processing(std::string input)
 
     vector<string> parameters = ParseCommand(input);
     if (functions.count(parameters[0]) > 0)
-        *writeBuffer = functions[parameters[0]]->Execute(parameters, players, player, tables);
+        return functions[parameters[0]]->Execute(parameters, &players,
+                                                 player, &tables);
     else
-        *writeBuffer = "The command doesn't exist\n";
+        return "The command doesn't exist\n";
 }
 
 }

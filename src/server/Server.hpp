@@ -30,6 +30,16 @@ class Server
             Service.stop();
         }
 
+        void PrintTables()
+        {
+            processingCommand.GetTables().PrintTables();
+        }
+
+        void PrintPlayers()
+        {
+            processingCommand.GetPlayers().PrintPlayers();
+        }
+
     private:
         void Accept()
         {
@@ -39,7 +49,7 @@ class Server
                     if (!ec)
                     {
                         std::make_shared<Connection>(
-                            std::move(serverSocket), &players, &tables)->Start();
+                            std::move(serverSocket), &processingCommand)->Start();
                         Accept();
                     }
                 }
@@ -49,8 +59,7 @@ class Server
         boost::asio::io_service Service;
         boost::asio::ip::tcp::acceptor Acceptor;
         boost::asio::ip::tcp::socket serverSocket;
-        Players players;
-        Tables tables;
+        ProcessingCommand processingCommand;
 };
 
 };

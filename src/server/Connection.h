@@ -10,7 +10,7 @@ namespace WhistGame {
 class Connection : public std::enable_shared_from_this<Connection>
 {
     public:
-        Connection(boost::asio::ip::tcp::socket, Players*, Tables*);
+        Connection(boost::asio::ip::tcp::socket, ProcessingCommand*);
         virtual~ Connection();
         void Start();
     private:
@@ -21,10 +21,8 @@ class Connection : public std::enable_shared_from_this<Connection>
         boost::asio::ip::tcp::socket playerSocket;
         HandlerAllocator allocator;
         std::string writeBuffer;
-        Players *players;
         Player player;
-        Tables *tables;
-        ProcessingCommand processingCommand;
+        ProcessingCommand *processingCommand;
         char *readBuffer;
 };
 

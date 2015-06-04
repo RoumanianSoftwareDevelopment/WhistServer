@@ -3,21 +3,24 @@
 
 #include "Players.h"
 #include "Tables.h"
+#include "Commands.h"
+#include "../database/date.h"
 
 namespace WhistGame {
 
 class ProcessingCommand
 {
     public:
-        ProcessingCommand(WhistGame::Players*, WhistGame::Player*,
-                          WhistGame::Tables*, std::string*);
+        ProcessingCommand();
         virtual~ ProcessingCommand();
-        void Processing(std::string);
+        std::string Processing(std::string, Player*);
+        Players& GetPlayers();
+        Tables& GetTables();
     private:
-        WhistGame::Players *players;
-        WhistGame::Player *player;
-        WhistGame::Tables *tables;
-        std::string *writeBuffer;
+        std::string h = host, n = nume, c = client, p = parola;
+        WhistGame::Players players;
+        WhistGame::Tables tables;
+        WhistGame::Database database;
 };
 
 }

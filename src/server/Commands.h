@@ -6,8 +6,9 @@
 
 namespace WhistGame {
 
-#define constructor(x) x(WhistGame::Database& database) : _database(&database) \
+#define constructor(x) x(WhistGame::Database &database) \
                         { \
+                            _database = &database; \
                         }
 
 #define if_wrong_command(x, message) if (parameters.size() != x) \

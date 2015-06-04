@@ -8,16 +8,13 @@ using namespace WhistGame;
 
 namespace WhistGame {
 
-Connection::Connection(tcp::socket sock, Players* _players, Tables* _tables) :
+Connection::Connection(tcp::socket sock, ProcessingCommand *procCom) :
     playerSocket(std::move(sock)),
-    player(&playerSocket),
-    processingCommand(_players, &player, _tables, &writeBuffer)
+    player(&playerSocket)
 {
-    players = _players;
-    tables = _tables;
     readBuffer = (char*) malloc(1024 * sizeof(char));
     memset(readBuffer, 0, 1024);
-    players->AddPlayer(&player);
+    processingCommand = procCom;
 }
 
 Connection::~Connection()
@@ -46,7 +43,7 @@ void Connection::Read()
                     while (IsThereAnyCommand(readBuffer))
                     {
                         string command = ParseMessage(readBuffer);
-                        processingCommand.Processing(command);
+                        processingCommand->Processing(command, &player);
                         Write(length);
                     }
 
@@ -54,7 +51,6 @@ void Connection::Read()
                 }
                 else
                 {
-                    players->RemovePlayer(&player);
                 }
             }
         )
@@ -76,7 +72,6 @@ void Connection::Write(size_t length)
                 }
                 else
                 {
-                    players->RemovePlayer(&player);
                 }
             }
         )
