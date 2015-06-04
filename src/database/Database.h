@@ -7,9 +7,6 @@
 #include <cppconn/statement.h>
 #include <cppconn/resultset.h>
 #include <string>
-#include <vector>
-#include <ctime>
-#include <random>
 
 namespace WhistGame {
 
@@ -63,7 +60,6 @@ class Database
         std::string GetRankName(std::string& rank);
         std::string GetName(uint64_t);
         void SendNotification(std::string&, std::string&);
-        void PrintData();
         void AddExp(uint64_t*, uint64_t*, uint64_t);
         void AddBonus(std::string& name, std::string& lastLogin,
                       int32_t day, int64_t points);
