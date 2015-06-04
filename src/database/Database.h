@@ -7,6 +7,8 @@
 #include <cppconn/statement.h>
 #include <cppconn/resultset.h>
 #include <string>
+#include <ctime>
+#include <random>
 
 namespace WhistGame {
 
