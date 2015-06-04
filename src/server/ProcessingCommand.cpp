@@ -50,8 +50,8 @@ string ProcessingCommand::Processing(string input, Player *player)
          {"IsActivated", new IsActivatedCommand(database)},
          {"Logout", new LogoutCommand(database)},
          {"Exit", new ExitCommand(database)},
-//         {},
-//         {},
+         {"JoinToTable", new JoinToTableCommand(database)},
+         {"CreateTable", new CreateTableCommand(database)},
 //         {},
          {"Register", new RegisterCommand(database)}};
 

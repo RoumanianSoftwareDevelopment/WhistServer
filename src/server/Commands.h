@@ -3,6 +3,8 @@
 
 #include "../database/Database.h"
 #include "Player.h"
+#include "../utilities/print.h"
+#include "../utilities/checks.h"
 
 namespace WhistGame {
 
@@ -64,8 +66,12 @@ class LogoutCommand : public Command
             if (player->GetName() == "")
                 return "Logout:you are not connected\n";
 
+            PrintData();
+            std::cout << "# INFO: '" << player->GetName() << "' disconnected.\n";
+
             players->RemovePlayer(player);
             player->SetName("");
+
             return "Logout:successfully\n";
         }
 
@@ -353,17 +359,38 @@ class JoinToTableCommand : public Command
 
     private:
         WhistGame::Database *_database;
+};
 
-        bool isNumber(std::string& str) const
+class CreateTableCommand : public Command
+{
+    public:
+        constructor(CreateTableCommand)
+
+        EXECUTE
         {
-            int size = str.size();
-            for (int i = 0; i < size; i++)
-                if (str[i] < '0' || str[i] > '9')
-                    return false;
+            if_wrong_command(2, "Wrong command\n");
+            if (player->GetName() == "")
+                return "You must be connected\n";
 
-            return true;
+            int type;
+            if (isNumber(parameters[1]))
+                type = stoi(parameters[1]);
+            else
+                return "Wrong command\n";
+
+            if (type != 1 && type != 8)
+                return "Wrong command\n";
+
+            short int id = tables->GeneratesId();
+            if (id == -1)
+                return "CreateTable:failed\n";
+            tables->AddTable(new Table(player, type, id));
+
+            return "CreateTable:successfully\n";
         }
 
+    private:
+        WhistGame::Database *_database;
 };
 
 }; // end namespace
