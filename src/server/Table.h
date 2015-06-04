@@ -21,6 +21,7 @@ class Table
         bool RemoveSpectator(WhistGame::Player*);
         unsigned int GetId() const;
         short int GetType() const;
+        void PrintTable() const;
     private:
         const unsigned int id;
         const short int type;

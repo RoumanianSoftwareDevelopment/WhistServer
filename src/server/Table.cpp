@@ -1,5 +1,6 @@
 #include "Table.h"
 #include <algorithm>
+#include <iostream>
 
 using namespace std;
 
@@ -79,6 +80,39 @@ short int Table::GetType() const
 
 Table::~Table()
 {
+}
+
+void Table::PrintTable() const
+{
+    for (int i = 0; i < 122; i++)
+        cout << '*';
+    cout << "\n* Type: " << type;
+    for (int i = 0; i < 112; i++)
+        cout << ' ';
+    cout << "*\n* ID: " << id;
+    for (int i = 0; i < 115; i++)
+        cout << ' ';
+    cout << "*\n* ";
+
+    int len = 2;
+    for (int i = 0; i < MAX_PLAYERS_AT_TABLE; i++)
+        if (players[i] != NULL)
+        {
+            cout << players[i]->GetName() << " ";
+            len += players[i]->GetName().size() + 1;
+        }
+        else
+        {
+            cout << "NULL ";
+            len += 5;
+        }
+
+    for (int i = 0; i < 122 - len; i++)
+        cout << ' ';
+    cout << "*\n";
+    for (int i = 0; i < 122; i++)
+        cout << '*';
+    cout << "\n\n";
 }
 
 }
