@@ -33,27 +33,28 @@ void Connection::Read()
     auto self(shared_from_this());
     playerSocket.async_read_some(
         boost::asio::buffer((void*)(readBuffer + len), 1023 - len),
-        MakeCustomAllocHandler(allocator,
-            [this, self, len](boost::system::error_code ec, std::size_t length)
+        [this, self, len](boost::system::error_code ec, std::size_t length)
+        {
+            if (!ec)
             {
-                if (!ec)
-                {
-                    readBuffer[length + len] = '\0';
+                readBuffer[length + len] = '\0';
 
-                    while (IsThereAnyCommand(readBuffer))
-                    {
-                        string command = ParseMessage(readBuffer);
-                        processingCommand->Processing(command, &player);
-                        Write(length);
-                    }
-
-                    Read();
-                }
-                else
+                while (IsThereAnyCommand(readBuffer))
                 {
+                    string command = ParseMessage(readBuffer);
+                    writeBuffer = processingCommand->Processing(command,
+                                                                &player);
+                    Write(length);
                 }
+
+                Read();
             }
-        )
+            else
+            {
+                if (player.GetName() != "")
+                    processingCommand->RemovePlayer(&player);
+            }
+        }
     );
 }
 
@@ -63,18 +64,18 @@ void Connection::Write(size_t length)
     boost::asio::async_write(
         playerSocket,
         boost::asio::buffer(writeBuffer.c_str(), writeBuffer.size()),
-        MakeCustomAllocHandler(allocator,
-            [this, self](boost::system::error_code ec, std::size_t)
+        [this, self](boost::system::error_code ec, std::size_t)
+        {
+            if (!ec)
             {
-                if (!ec)
-                {
-                    writeBuffer = "";
-                }
-                else
-                {
-                }
+                writeBuffer = "";
             }
-        )
+            else
+            {
+                if (player.GetName() != "")
+                    processingCommand->RemovePlayer(&player);
+            }
+        }
     );
 }
 
