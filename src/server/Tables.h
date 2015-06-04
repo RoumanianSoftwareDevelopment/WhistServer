@@ -18,6 +18,7 @@ class Tables
         bool RemoveTable(unsigned short int id);
         unsigned short int GetTablesNo() const;
         short int GeneratesId() const;
+        void PrintTables() const;
     private:
         WhistGame::Table* tables[MAX_TABLES];
         unsigned short int tablesNo = 0;

@@ -1,4 +1,7 @@
 #include "Tables.h"
+#include <iostream>
+
+using namespace std;
 
 namespace WhistGame
 {
@@ -69,6 +72,19 @@ short int Tables::GeneratesId() const
             return i;
 
     return -1;
+}
+
+void Tables::PrintTables() const
+{
+    if (tablesNo == 0)
+    {
+        cout << "Doesn't exist tables.\n";
+        return;
+    }
+
+    for (int i = 0; i < MAX_TABLES; i++)
+        if (tables[i] != NULL)
+            tables[i]->PrintTable();
 }
 
 }
