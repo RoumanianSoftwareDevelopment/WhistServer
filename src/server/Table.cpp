@@ -46,7 +46,8 @@ bool Table::RemovePlayer(WhistGame::Player* player)
 bool Table::AddSpectator(WhistGame::Player* player)
 {
     auto i = find(spectators.begin(), spectators.end(), player);
-    if (i == spectators.end())
+    auto j = find(players.begin(), players.end(), player);
+    if (i != spectators.end() || j != players.end())
         return false;
 
     spectators.push_back(player);
@@ -60,7 +61,7 @@ bool Table::RemoveSpectator(WhistGame::Player* player)
     if (i == spectators.end())
         return false;
 
-    spectators.remove(player);
+    spectators.erase(i);
 
     return true;
 }
