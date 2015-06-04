@@ -53,6 +53,8 @@ void Connection::Read()
             {
                 if (player.GetName() != "")
                     processingCommand->RemovePlayer(&player);
+            //    playerSocket.shutdown(tcp::socket::shutdown_both, ec);
+                playerSocket.close();
             }
         }
     );
@@ -74,6 +76,7 @@ void Connection::Write(size_t length)
             {
                 if (player.GetName() != "")
                     processingCommand->RemovePlayer(&player);
+                playerSocket.close();
             }
         }
     );
