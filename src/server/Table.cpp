@@ -11,12 +11,14 @@ Table::Table(WhistGame::Player *player, short int _type, unsigned int _id) :
 {
     players[0] = player;
 
-    for (int i = 0; i < MAX_PLAYERS_AT_TABLE; i++)
+    for (int i = 1; i < MAX_PLAYERS_AT_TABLE; i++)
         players[i] = NULL;
 }
 
 bool Table::AddPlayer(WhistGame::Player* player, int position)
 {
+    if (position < 0 || position >= MAX_PLAYERS_AT_TABLE || player == NULL)
+        return false;
     if(players[position] == NULL)
     {
         players[position] = player;
