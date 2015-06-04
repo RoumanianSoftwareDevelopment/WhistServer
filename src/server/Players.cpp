@@ -1,4 +1,8 @@
 #include "Players.h"
+#include <functional>
+#include <algorithm>
+
+using namespace std;
 
 namespace WhistGame {
 
@@ -29,6 +33,11 @@ Player* Players::GetPlayer(std::string& name) const
 void Players::RemovePlayer(Player* player)
 {
     players.remove(player);
+}
+
+void Players::PrintPlayers() const
+{
+    for_each(players.begin(), players.end(), mem_fun(&Player::PrintPlayer));
 }
 
 }

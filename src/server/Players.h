@@ -14,6 +14,7 @@ class Players
         void AddPlayer(Player*);
         Player* GetPlayer(std::string&) const;
         void RemovePlayer(Player*);
+        void PrintPlayers() const;
     private:
         std::list<Player*> players;
 };
