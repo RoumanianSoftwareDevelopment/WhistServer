@@ -8,6 +8,6 @@ LDFLAGS += -pthread -lmysqlcppconn -lboost_system
 bin_PROGRAMS = Server
 
 Server_SOURCES = main.cpp database/Database.cpp utilities/print.cpp \
-		 parser/parser.cpp server/Player.cpp \
+		 parser/parser.cpp server/Player.cpp utilities/checks.cpp \
 		 server/Players.cpp server/Connection.cpp server/Table.cpp \
 		 server/ProcessingCommand.cpp server/Tables.cpp
