@@ -41,9 +41,48 @@ class LoginCommand : public Command
 
             std::string result = _database->Login(parameters[1], parameters[2]);
             if (result == "Login:successfully\n");
+            {
+                players->AddPlayer(player);
                 player->SetName(parameters[1]);
+            }
 
             return result;
+        }
+
+    private:
+        WhistGame::Database *_database;
+};
+
+class LogoutCommand : public Command
+{
+    public:
+        constructor(LogoutCommand)
+
+        EXECUTE
+        {
+            if_wrong_command(1, "Wrong command\n");
+            if (player->GetName() == "")
+                return "Logout:you are not connected\n";
+
+            players->RemovePlayer(player);
+            player->SetName("");
+            return "Logout:successfully\n";
+        }
+
+    private:
+        WhistGame::Database *_database;
+};
+
+class ExitCommand : public Command
+{
+    public:
+        constructor(ExitCommand)
+
+        EXECUTE
+        {
+            if_wrong_command(1, "Wrong command\n");
+            player->GetSocket()->shutdown(boost::asio::ip::tcp::socket::shutdown_both);
+            return "";
         }
 
     private:
