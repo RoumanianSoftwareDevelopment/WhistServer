@@ -1,4 +1,7 @@
 #include "Player.h"
+#include <iostream>
+
+using namespace std;
 
 namespace WhistGame
 {
@@ -26,6 +29,11 @@ std::string Player::GetName() const
 boost::asio::ip::tcp::socket* Player::GetSocket() const
 {
     return socketPlayer;
+}
+
+void Player::PrintPlayer() const
+{
+    cout << name << "\n";
 }
 
 }

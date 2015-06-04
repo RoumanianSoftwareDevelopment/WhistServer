@@ -14,6 +14,7 @@ class Player
         void SetName(std::string);
         std::string GetName() const;
         boost::asio::ip::tcp::socket* GetSocket() const;
+        void PrintPlayer() const;
     private:
         std::string name;
         boost::asio::ip::tcp::socket *socketPlayer;
