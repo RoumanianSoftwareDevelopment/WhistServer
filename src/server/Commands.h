@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "../utilities/print.h"
 #include "../utilities/checks.h"
+#include <iostream>
 
 namespace WhistGame {
 
@@ -355,6 +356,34 @@ class JoinToTableCommand : public Command
                 return "JoinToTable:successfully\n";
             else
                 return "JoinToTable:failed\n";
+        }
+
+    private:
+        WhistGame::Database *_database;
+};
+
+class SitDownCommand : public Command
+{
+    public:
+        constructor(SitDownCommand)
+
+        EXECUTE
+        {
+            if_wrong_command(3, "Wrong command\n");
+            if (player->GetName() == "")
+                return "You must be connected\n";
+            if (!isNumber(parameters[1]) || !isNumber(parameters[2]))
+                return "Wrong command\n";
+            
+            int id = stoi(parameters[1]), position = stoi(parameters[2]);
+            if (id < 0 || id > 99 || position < 0 ||
+                position > MAX_PLAYERS_AT_TABLE)
+                return "Wrong command\n";
+
+            if (tables->GetTable(id)->AddPlayer(player, position))
+                return "SitDown:successfully\n";
+            else
+                return "SitDown:failed\n";
         }
 
     private:

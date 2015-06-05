@@ -52,6 +52,12 @@ string ProcessingCommand::Processing(string input, Player *player)
          {"Exit", new ExitCommand(database)},
          {"JoinToTable", new JoinToTableCommand(database)},
          {"CreateTable", new CreateTableCommand(database)},
+         {"SitDown", new SitDownCommand(database)},
+//         {},
+//         {},
+//         {},
+//         {},
+//         {},
 //         {},
          {"Register", new RegisterCommand(database)}};
 
