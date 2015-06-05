@@ -70,6 +70,15 @@ bool Table::RemoveSpectator(WhistGame::Player* player)
     return true;
 }
 
+bool Table::SearchSpectator(WhistGame::Player* player)
+{
+    auto i = find(spectators.begin(), spectators.end(), player);
+    if (i == spectators.end())
+        return false;
+
+    return true;
+}
+
 unsigned int Table::GetId() const
 {
     return id;

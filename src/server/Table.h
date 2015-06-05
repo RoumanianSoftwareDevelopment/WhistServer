@@ -19,6 +19,7 @@ class Table
         bool RemovePlayer(WhistGame::Player*);
         bool AddSpectator(WhistGame::Player*);
         bool RemoveSpectator(WhistGame::Player*);
+        bool SearchSpectator(WhistGame::Player*);
         unsigned int GetId() const;
         short int GetType() const;
         void PrintTable() const;
