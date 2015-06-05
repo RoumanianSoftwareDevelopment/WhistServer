@@ -380,10 +380,16 @@ class SitDownCommand : public Command
                 position > MAX_PLAYERS_AT_TABLE)
                 return "Wrong command\n";
 
-            if (tables->GetTable(id)->AddPlayer(player, position))
-                return "SitDown:successfully\n";
-            else
+            Table *t = tables->GetTable(id);
+            if (t == NULL)
+                return "Table doesn't exist\n";
+            if (!t->SearchSpectator(player))
+                return "SitDown:first time must to be spectator\n";
+            if (!t->AddPlayer(player, position))
                 return "SitDown:failed\n";
+
+            t->RemoveSpectator(player);
+            return "SitDown:successfully\n";
         }
 
     private:
