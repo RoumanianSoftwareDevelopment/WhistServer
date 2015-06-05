@@ -21,6 +21,12 @@ void Player::SetName(std::string newName)
     name = newName;
 }
 
+void Player::Write(string& message)
+{
+    boost::asio::write(*socketPlayer,
+                       boost::asio::buffer(message.c_str(), message.size()));
+}
+
 std::string Player::GetName() const
 {
     return name;
