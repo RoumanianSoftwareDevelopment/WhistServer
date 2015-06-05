@@ -31,6 +31,8 @@ void ReadCommandsFromKeyboard(Server& server)
 
 int main(void)
 {
+    system("clear");
+
     Server server(12345);
     thread t(ReadCommandsFromKeyboard, std::ref(server));
     server.Start();
