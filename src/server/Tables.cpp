@@ -43,13 +43,10 @@ bool Tables::RemoveTable(unsigned short int id)
 
 WhistGame::Table* Tables::GetTable(unsigned short int id) const
 {
-    for(unsigned short int i = 0; i < MAX_TABLES; i++)
-    {
-        if(tables[i]->GetId() == id)
-            return tables[i];
-    }
+    if (id < 0 || id >= MAX_TABLES)
+        return NULL;
 
-    return NULL;
+    return tables[id];
 }
 
 Tables::~Tables()
